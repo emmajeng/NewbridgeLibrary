@@ -19,6 +19,7 @@ namespace NewbridgeLibrary.Controllers
         public ActionResult Index()
         {
             var feedbacks = db.Feedbacks.Include(f => f.Book);
+           
             return View(feedbacks.ToList());
         }
 

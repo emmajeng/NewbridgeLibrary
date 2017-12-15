@@ -16,8 +16,24 @@ namespace NewbridgeLibrary.Controllers
         private LibraryContext db = new LibraryContext();
 
         // GET: Authors
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder)
         {
+            var authors = from s in db.Authors
+                           select s;
+
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    authors = authors.OrderByDescending(s => s.Name);
+                    break;
+                
+                default:
+                    authors = authors.OrderBy(s => s.Name);
+                    break;
+            }
+
             return View(db.Authors.ToList());
         }
 
