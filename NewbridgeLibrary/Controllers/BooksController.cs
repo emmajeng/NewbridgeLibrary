@@ -16,9 +16,16 @@ namespace NewbridgeLibrary.Controllers
         private LibraryContext db = new LibraryContext();
 
         // GET: Books
-        public ActionResult Index(string sortOrder)
+        public ViewResult Index(string sortOrder, string searchString)
         {
             var books = db.Books.Include(b => b.Author);
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                books = books.Where(s => s.Title.Contains(searchString)
+                                       || s.Title.Contains(searchString));
+            }
+
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
 
             switch (sortOrder)

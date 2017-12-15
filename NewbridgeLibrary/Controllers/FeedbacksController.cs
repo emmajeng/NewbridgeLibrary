@@ -16,10 +16,10 @@ namespace NewbridgeLibrary.Controllers
         private LibraryContext db = new LibraryContext();
 
         // GET: Feedbacks
-        public ActionResult Index()
+        public ViewResult Index(string searchString)
         {
             var feedbacks = db.Feedbacks.Include(f => f.Book);
-           
+            
             return View(feedbacks.ToList());
         }
 
