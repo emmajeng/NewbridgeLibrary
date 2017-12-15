@@ -15,6 +15,8 @@ namespace NewbridgeLibrary.Controllers
     {
         private LibraryContext db = new LibraryContext();
 
+        [OutputCache(Duration = 60, VaryByParam = "*")]
+
         // GET: Authors
         public ViewResult Index()
         {

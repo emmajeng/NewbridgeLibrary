@@ -16,6 +16,9 @@ namespace NewbridgeLibrary.Controllers
         private LibraryContext db = new LibraryContext();
 
         // GET: Books
+
+        [OutputCache(Duration = 60, VaryByParam = "*")]
+
         public ViewResult Index(string sortOrder, string searchString)
         {
             var books = db.Books.Include(b => b.Author);
